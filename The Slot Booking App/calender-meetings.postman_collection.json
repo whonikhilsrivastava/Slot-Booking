@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "6b0bfe3a-348b-4738-a8ea-8513d4406f16",
+		"name": "calender-meetings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user signup",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/user_signup?email=saniljain08@gmail.com&password=123456&name=jaini",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"user_signup"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "saniljain08@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						},
+						{
+							"key": "name",
+							"value": "jaini"
+						}
+					]
+				},
+				"description": "# Signup api for the user\n\n## Requires\n\t- name\n\t- email\n\t- password\n\n\n## Response\n\t- authorization id and password for basic auth\n\t- calender link to get auth tokens for basic authentication to book meetings  on that user's calender"
+			},
+			"response": []
+		},
+		{
+			"name": "user signin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/user_signin?email=saniljain08@gmail.com&password=123456",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"user_signin"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "saniljain08@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						}
+					]
+				},
+				"description": "# Signin api for the user .\n\nThis api used to signin user.\n\n## Required Params\n\t-email\n\t-password\n## Response\n\t- authorization id,password for basic auth for user to manage time slots,manage meetings\n\t- meeting id,password for basic auth for anyone to book time slots of the user ."
+			},
+			"response": []
+		},
+		{
+			"name": "calender access token for every one",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "this api is used to provide  meeting id token and meeting password for  basic auth authorization to be used to book meeting s ,get available time slots of a user\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "create time slot",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "e10adc3949ba59abbe56e057f20f883e",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/time_slots?date=01-01-2020&start_time=09:00:00",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"time_slots"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "01-01-2020"
+						},
+						{
+							"key": "start_time",
+							"value": "09:00:00"
+						}
+					]
+				},
+				"description": "the api requires params\n - the day of the slot in string format (%m-%d-%Y)\n - the start time of the slot in string format (%H:%M:%S)\n -basic auth using authorization id,password from signin api"
+			},
+			"response": []
+		},
+		{
+			"name": "delete a particular time slot",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "e10adc3949ba59abbe56e057f20f883e",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/time_slots?time_slot_id=1",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"time_slots"
+					],
+					"query": [
+						{
+							"key": "time_slot_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "# requires \n\t- time slot id(integer)\n# it will also delete the meeting mapped to that time slot\n\n- use authorization id ,password from user signin for basic auth type of authorization"
+			},
+			"response": []
+		},
+		{
+			"name": "get list of time slots of the day",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "-api requires\n\t- date in string format(%m-%d-%Y)\n\n- use authorization id,password as basic auth from signin apis"
+			},
+			"response": []
+		},
+		{
+			"name": "list of time slots to book meeting  for anonyamous or registered users",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "amFpbnNhbmlsMThAZ21haWwuY29t",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/time_slot_booking?date=01-01-2020",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"time_slot_booking"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "01-01-2020"
+						}
+					]
+				},
+				"description": "this api is for anyone with meeting id and meeting password for basic auth  to get available time slots of the day of the owners of meeting id and password.\n\nrequires:\n- date in string format(%m-%d-%Y)\n- meeting id and meeting token of the owner of the timeslots to be used in basic auth authorization\n"
+			},
+			"response": []
+		},
+		{
+			"name": "book meeting",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "amFpbnNhbmlsMThAZ21haWwuY29t",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com/book_meetings?time_slot_id=2&name=sanil&email=saniljain08@gmail.com&purpose=testing",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"book_meetings"
+					],
+					"query": [
+						{
+							"key": "time_slot_id",
+							"value": "2"
+						},
+						{
+							"key": "name",
+							"value": "sanil"
+						},
+						{
+							"key": "email",
+							"value": "saniljain08@gmail.com"
+						},
+						{
+							"key": "purpose",
+							"value": "testing"
+						}
+					]
+				},
+				"description": "# requires\n\t- time_slot_id(integer)\n\t- email(string)\n\t- name(string)\n\t- purpose(string)\n\t- basic auth authorization using meeting id and meeting password of the user whose time slot is being booked ."
+			},
+			"response": []
+		},
+		{
+			"name": "meetings list",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "e10adc3949ba59abbe56e057f20f883e",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com//meetings",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"meetings"
+					]
+				},
+				"description": "this api is for the app users to get their list of  meetings .\n# requires\n\t- basic auth authorization using authorization token id and password from signin api response"
+			},
+			"response": []
+		},
+		{
+			"name": "cancel a meeting",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "e10adc3949ba59abbe56e057f20f883e",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://calender-meetings.herokuapp.com//meetings?meeting_id=1",
+					"protocol": "https",
+					"host": [
+						"calender-meetings",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"meetings"
+					],
+					"query": [
+						{
+							"key": "meeting_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "requires\n -meeting id \n -basic auth authorization using authorization token id and password from signin api response.\n"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
